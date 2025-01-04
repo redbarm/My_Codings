@@ -11,6 +11,8 @@ public:
         stack<char> stack;
         unordered_map<char, char> matching {{'(',')'}, {'{','}'}, {'[',']'}};
         
+        cout<<"HashMap associated closing character :"<<matching['(']<<endl;
+
         for (char c: s) {
             if (matching.find(c) != matching.end()) {
                 stack.push(c);
@@ -33,7 +35,7 @@ public:
 };
 
 int main(){
-    string s = "({})";
+    string s = "({}*";
     Solution solution;
     cout<<solution.isValid(s)<<endl;
     return 0;
