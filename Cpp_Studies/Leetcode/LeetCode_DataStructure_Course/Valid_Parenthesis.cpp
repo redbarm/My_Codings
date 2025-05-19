@@ -15,13 +15,18 @@ public:
 
         for (char c: s) {
             if (matching.find(c) != matching.end()) {
+                cout<<c<<endl;
+                cout<<matching[c]<<endl;
                 stack.push(c);
             } else {
+                cout<<"I am here and "<<"don't match character: "<<c<<endl;
+
                 if (stack.empty()) {
                     return false;
                 }
                 
                 char previousOpening = stack.top();
+                cout<<"previous opening: "<<previousOpening<<endl;
                 if (matching[previousOpening] != c) {
                     return false;
                 }
@@ -35,7 +40,7 @@ public:
 };
 
 int main(){
-    string s = "({}*";
+    string s = "({})";
     Solution solution;
     cout<<solution.isValid(s)<<endl;
     return 0;
