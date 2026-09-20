@@ -31,19 +31,23 @@ while(1):
     edges=cv.Canny(res,180,200)
     contours, hierarchy = cv.findContours(edges, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
     # Calculate the CG for each contour
-    cnt = contours[0]
-    M=cv.moments(cnt)
-    for contour in contours:
-        # Calculate moments
-        M = cv.moments(contour)
-
-    # Calculate CG coordinates
-    if M['m00'] != 0:
-        cx = int(M['m10'] / M['m00'])
-        cy = int(M['m01'] / M['m00'])
+    if len(contours)==0:
+        cx=100
+        cy=100
+    else:
+        cnt = contours[0]
+        M=cv.moments(cnt)
+        for contour in contours:
+            # Calculate moments
+            M = cv.moments(contour)
+        # Calculate CG coordinates
+        if M['m00'] != 0:
+            cx = int(M['m10'] / M['m00'])
+            cy = int(M['m01'] / M['m00'])
 
         # Draw a circle at the CG
-        cv.circle(res, (cx, cy), 10, (0, 0, 255), -1)
+    
+    cv.circle(res, (cx, cy), 10, (0, 0, 255), -1)
 
     cv.imshow('frame',frame)
     cv.imshow('mask',mask)
